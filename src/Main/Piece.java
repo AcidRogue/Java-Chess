@@ -4,8 +4,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 public class Piece {
-    public Piece(String name, int pos){
+    public Piece(String name, int x, int y){
         ImageView iv = new ImageView("/Sprites/" + name + ".png");
-        ((HBox)Main.gridPane.getChildren().get(pos)).getChildren().add(iv);
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if(i == x && j == y){
+                    Main.spaces[i][j].setTaken(true);
+                    Main.spaces[i][j].setImage(iv);
+                }
+            }
+        }
     }
+
+
 }

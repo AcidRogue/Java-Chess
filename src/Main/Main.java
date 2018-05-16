@@ -1,70 +1,69 @@
 package Main;
 
 import javafx.application.Application;
-import javafx.geometry.HPos;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-
     private double canvasWidth = 600;
     private double canvasHeight = 600;
+
+    public static Space[][] spaces;
 
     public static GridPane gridPane;
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-
+    public void start(Stage primaryStage) throws Exception {
+        spaces = new Space[8][8];
 
         Parent root = createGridPane();
+        placePieces();
+        handleOnClick();
         primaryStage.setTitle("Chess");
         primaryStage.setScene(new Scene(root, canvasWidth, canvasHeight));
         primaryStage.show();
 
 
-
-        placePieces();
     }
 
-
     void placePieces() {
-        new Piece("black_rook", 0);
-        new Piece("black_knight", 8);
-        new Piece("black_bishop", 16);
-        new Piece("black_queen", 24);
-        new Piece("black_king",32 );
-        new Piece("black_bishop", 40);
-        new Piece("black_knight", 48);
-        new Piece("black_rook", 56);
-        new Piece("black_pawn", 1);
-        new Piece("black_pawn", 9);
-        new Piece("black_pawn", 17);
-        new Piece("black_pawn", 25);
-        new Piece("black_pawn", 33);
-        new Piece("black_pawn", 41);
-        new Piece("black_pawn", 49);
-        new Piece("black_pawn", 57);
+        new Piece("black_rook", 0, 0);
+        new Piece("black_knight", 1, 0);
+        new Piece("black_bishop", 2, 0);
+        new Piece("black_queen", 3, 0);
+        new Piece("black_king", 4, 0);
+        new Piece("black_bishop", 5, 0);
+        new Piece("black_knight", 6, 0);
+        new Piece("black_rook", 7, 0);
 
-        new Piece("white_rook", 7);
-        new Piece("white_knight", 15);
-        new Piece("white_bishop", 23);
-        new Piece("white_queen", 31);
-        new Piece("white_king", 39);
-        new Piece("white_bishop", 47);
-        new Piece("white_knight", 55);
-        new Piece("white_rook", 63);
-        new Piece("white_pawn", 6);
-        new Piece("white_pawn", 14);
-        new Piece("white_pawn", 22);
-        new Piece("white_pawn", 30);
-        new Piece("white_pawn", 38);
-        new Piece("white_pawn", 46);
-        new Piece("white_pawn", 54);
-        new Piece("white_pawn", 62);
+        new Piece("black_pawn", 0, 1);
+        new Piece("black_pawn", 1, 1);
+        new Piece("black_pawn", 2, 1);
+        new Piece("black_pawn", 3, 1);
+        new Piece("black_pawn", 4, 1);
+        new Piece("black_pawn", 5, 1);
+        new Piece("black_pawn", 6, 1);
+        new Piece("black_pawn", 7, 1);
+
+        new Piece("white_rook", 0, 7);
+        new Piece("white_knight", 1, 7);
+        new Piece("white_bishop", 2, 7);
+        new Piece("white_queen", 3, 7);
+        new Piece("white_king", 4, 7);
+        new Piece("white_bishop", 5, 7);
+        new Piece("white_knight", 6, 7);
+        new Piece("white_rook", 7, 7);
+        new Piece("white_pawn", 0, 6);
+        new Piece("white_pawn", 1, 6);
+        new Piece("white_pawn", 2, 6);
+        new Piece("white_pawn", 3, 6);
+        new Piece("white_pawn", 4, 6);
+        new Piece("white_pawn", 5, 6);
+        new Piece("white_pawn", 6, 6);
+        new Piece("white_pawn", 7, 6);
     }
 
     private GridPane createGridPane() {
@@ -80,16 +79,18 @@ public class Main extends Application {
             for (int j = 0; j < 8; j++) {
                 RowConstraints row = new RowConstraints(75);
                 gridPane.getRowConstraints().add(row);
+
+                spaces[i][j] = new Space(i, j);
                 if (counter % 2 == 0) {
-                    HBox hBox = new HBox();
-                    hBox.setStyle("-fx-background-color: #444444");
-                    hBox.setAlignment(Pos.CENTER);
-                    gridPane.add(hBox, i, j);
+                    spaces[i][j].setStyle(true);
                 } else {
-                    HBox hBox = new HBox();
-                    hBox.setAlignment(Pos.CENTER);
-                    gridPane.add(hBox, i, j);
+                    spaces[i][j].setStyle(false);
                 }
+
+
+
+                gridPane.add(spaces[i][j].getHBox(), i, j);
+
                 counter++;
             }
         }
@@ -97,6 +98,20 @@ public class Main extends Application {
         gridPane.setGridLinesVisible(true);
 
         return gridPane;
+    }
+
+    private void handleOnClick(){
+        for (int i = 0; i < spaces.length; i++) {
+            for (int j = 0; j < spaces[i].length; j++) {
+                boolean taken = spaces[i][j].getTaken();
+                spaces[i][j].getHBox().setOnMouseClicked(e -> {
+                    if(taken){
+                        System.out.println("aaaa");
+                    }
+                });
+            }
+        }
+
     }
 
     public static void main(String[] args) {
