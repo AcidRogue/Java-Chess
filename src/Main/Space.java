@@ -1,60 +1,62 @@
 package Main;
 
-import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import java.awt.*;
-
 public class Space {
-    private int x;
-    private int y;
     private HBox hBox;
     private boolean taken;
+    private int x;
+    private int y;
+    private String name;
+    private ImageView iv;
 
-    public Space(int x, int y){
+    public Space(HBox hBox, int x, int y) {
         this.x = x;
         this.y = y;
-        hBox = new HBox();
-        hBox.setAlignment(Pos.CENTER);
+        this.hBox = hBox;
         taken = false;
     }
 
-    public void setImage(ImageView iv){
+    public void putPiece(String name){
+        this.name = name;
+        iv = new ImageView("/Sprites/" + name + ".png");
+
+        setTaken(true);
+        setImage(iv);
+    }
+
+    public void setImage(ImageView iv) {
         hBox.getChildren().add(iv);
     }
 
-    public void setTaken(boolean taken){
+    public void removeImage(){
+        hBox.getChildren().remove(0);
+        this.taken = false;
+    }
+
+    public void setTaken(boolean taken) {
         this.taken = taken;
     }
-    public boolean getTaken(){
+
+    public boolean isTaken() {
         return this.taken;
     }
 
-    public void setStyle(boolean white){
-        if(!white){
-            hBox.setStyle("-fx-background-color: #444444");
-        }
-    }
-
-    public HBox getHBox(){
+    public HBox getHBox() {
         return this.hBox;
     }
 
-    public List<Space> getAvailable(){
-        List<Space> available = new ArrayList<>();
-
-
-
-        return available;
+    public int getX(){
+        return x;
+    }
+    public int getY(){
+        return y;
     }
 
-
-
-    public Point getPoints(){
-        return new Point(x, y);
+    public void move(int desX, int desY) {
+        Main.spaces[desX][desY].putPiece(this.name);
+        Main.spaces[desX][desY].setTaken(true);
+        removeImage();
     }
 }

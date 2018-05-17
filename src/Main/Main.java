@@ -25,45 +25,42 @@ public class Main extends Application {
         primaryStage.setTitle("Chess");
         primaryStage.setScene(new Scene(root, canvasWidth, canvasHeight));
         primaryStage.show();
-
-
     }
 
     void placePieces() {
-        new Piece("black_rook", 0, 0);
-        new Piece("black_knight", 1, 0);
-        new Piece("black_bishop", 2, 0);
-        new Piece("black_queen", 3, 0);
-        new Piece("black_king", 4, 0);
-        new Piece("black_bishop", 5, 0);
-        new Piece("black_knight", 6, 0);
-        new Piece("black_rook", 7, 0);
+        spaces[0][0].putPiece("black_rook");
+        spaces[1][0].putPiece("black_knight");
+        spaces[2][0].putPiece("black_bishop");
+        spaces[3][0].putPiece("black_queen");
+        spaces[4][0].putPiece("black_king");
+        spaces[5][0].putPiece("black_bishop");
+        spaces[6][0].putPiece("black_knight");
+        spaces[7][0].putPiece("black_rook");
+        spaces[0][1].putPiece("black_pawn");
+        spaces[1][1].putPiece("black_pawn");
+        spaces[2][1].putPiece("black_pawn");
+        spaces[3][1].putPiece("black_pawn");
+        spaces[4][1].putPiece("black_pawn");
+        spaces[5][1].putPiece("black_pawn");
+        spaces[6][1].putPiece("black_pawn");
+        spaces[7][1].putPiece("black_pawn");
 
-        new Piece("black_pawn", 0, 1);
-        new Piece("black_pawn", 1, 1);
-        new Piece("black_pawn", 2, 1);
-        new Piece("black_pawn", 3, 1);
-        new Piece("black_pawn", 4, 1);
-        new Piece("black_pawn", 5, 1);
-        new Piece("black_pawn", 6, 1);
-        new Piece("black_pawn", 7, 1);
-
-        new Piece("white_rook", 0, 7);
-        new Piece("white_knight", 1, 7);
-        new Piece("white_bishop", 2, 7);
-        new Piece("white_queen", 3, 7);
-        new Piece("white_king", 4, 7);
-        new Piece("white_bishop", 5, 7);
-        new Piece("white_knight", 6, 7);
-        new Piece("white_rook", 7, 7);
-        new Piece("white_pawn", 0, 6);
-        new Piece("white_pawn", 1, 6);
-        new Piece("white_pawn", 2, 6);
-        new Piece("white_pawn", 3, 6);
-        new Piece("white_pawn", 4, 6);
-        new Piece("white_pawn", 5, 6);
-        new Piece("white_pawn", 6, 6);
-        new Piece("white_pawn", 7, 6);
+        spaces[0][7].putPiece("white_rook");
+        spaces[1][7].putPiece("white_knight");
+        spaces[2][7].putPiece("white_bishop");
+        spaces[3][7].putPiece("white_queen");
+        spaces[4][7].putPiece("white_king");
+        spaces[5][7].putPiece("white_bishop");
+        spaces[6][7].putPiece("white_knight");
+        spaces[7][7].putPiece("white_rook");
+        spaces[0][6].putPiece("white_pawn");
+        spaces[1][6].putPiece("white_pawn");
+        spaces[2][6].putPiece("white_pawn");
+        spaces[3][6].putPiece("white_pawn");
+        spaces[4][6].putPiece("white_pawn");
+        spaces[5][6].putPiece("white_pawn");
+        spaces[6][6].putPiece("white_pawn");
+        spaces[7][6].putPiece("white_pawn");
     }
 
     private GridPane createGridPane() {
@@ -80,14 +77,15 @@ public class Main extends Application {
                 RowConstraints row = new RowConstraints(75);
                 gridPane.getRowConstraints().add(row);
 
-                spaces[i][j] = new Space(i, j);
-                if (counter % 2 == 0) {
-                    spaces[i][j].setStyle(true);
-                } else {
-                    spaces[i][j].setStyle(false);
+                HBox hBox = new HBox();
+
+                if (counter % 2 != 0) {
+                    hBox.setStyle("-fx-background-color: #444444");
                 }
 
+                hBox.setAlignment(Pos.CENTER);
 
+                spaces[i][j] = new Space(hBox, i, j);
 
                 gridPane.add(spaces[i][j].getHBox(), i, j);
 
@@ -100,13 +98,26 @@ public class Main extends Application {
         return gridPane;
     }
 
-    private void handleOnClick(){
+    private boolean pressed = false;
+
+    private Space toMove = null;
+
+    private void handleOnClick() {
         for (int i = 0; i < spaces.length; i++) {
             for (int j = 0; j < spaces[i].length; j++) {
-                boolean taken = spaces[i][j].getTaken();
-                spaces[i][j].getHBox().setOnMouseClicked(e -> {
-                    if(taken){
-                        System.out.println("aaaa");
+                Space s = spaces[i][j];
+
+                s.getHBox().setOnMousePressed(e -> {
+                    if(pressed){
+                        toMove.move(s.getX(), s.getY());
+                        toMove = null;
+                        pressed = false;
+                    }
+                    else{
+                        if (s.isTaken()) {
+                            pressed = true;
+                            toMove = s;
+                        }
                     }
                 });
             }
