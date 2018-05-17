@@ -36,14 +36,9 @@ public class Main extends Application {
         spaces[5][0].putPiece("black_bishop");
         spaces[6][0].putPiece("black_knight");
         spaces[7][0].putPiece("black_rook");
-        spaces[0][1].putPiece("black_pawn");
-        spaces[1][1].putPiece("black_pawn");
-        spaces[2][1].putPiece("black_pawn");
-        spaces[3][1].putPiece("black_pawn");
-        spaces[4][1].putPiece("black_pawn");
-        spaces[5][1].putPiece("black_pawn");
-        spaces[6][1].putPiece("black_pawn");
-        spaces[7][1].putPiece("black_pawn");
+        for (int i = 0; i < 8; i++) {
+            spaces[i][1].putPiece("black_pawn");
+        }
 
         spaces[0][7].putPiece("white_rook");
         spaces[1][7].putPiece("white_knight");
@@ -53,14 +48,9 @@ public class Main extends Application {
         spaces[5][7].putPiece("white_bishop");
         spaces[6][7].putPiece("white_knight");
         spaces[7][7].putPiece("white_rook");
-        spaces[0][6].putPiece("white_pawn");
-        spaces[1][6].putPiece("white_pawn");
-        spaces[2][6].putPiece("white_pawn");
-        spaces[3][6].putPiece("white_pawn");
-        spaces[4][6].putPiece("white_pawn");
-        spaces[5][6].putPiece("white_pawn");
-        spaces[6][6].putPiece("white_pawn");
-        spaces[7][6].putPiece("white_pawn");
+        for (int i = 0; i < 8; i++) {
+            spaces[i][6].putPiece("white_pawn");
+        }
     }
 
     private GridPane createGridPane() {
@@ -122,7 +112,6 @@ public class Main extends Application {
                 });
             }
         }
-
     }
 
     public static void main(String[] args) {
