@@ -10,41 +10,33 @@ public class Space {
     private int x;
     private int y;
 
-    private ImageView iv;
-
     private Piece piece;
 
     public Space(HBox hBox, int x, int y) {
         this.x = x;
         this.y = y;
         this.hBox = hBox;
+        piece = null;
         taken = false;
     }
 
-    public void putPiece(String name) {
-        this.piece = new Piece(this, name);
-        iv = new ImageView("/Sprites/" + name + ".png");
+    public void putPiece(Piece p) {
+        ImageView iv = new ImageView("/Sprites/" + p.getSide() + "_" + p.getName() + ".png");
 
-        setTaken(true);
-        setImage(iv);
+        taken = true;
+        hBox.getChildren().add(iv);
+
+        this.piece = p;
+    }
+
+    public void removePiece() {
+        hBox.getChildren().remove(0);
+        piece = null;
+        taken = false;
     }
 
     public Piece getPiece() {
         return piece;
-    }
-
-    public void setImage(ImageView iv) {
-        hBox.getChildren().add(iv);
-    }
-
-    public void removeImage() {
-        hBox.getChildren().remove(0);
-        piece = null;
-        setTaken(false);
-    }
-
-    public void setTaken(boolean taken) {
-        this.taken = taken;
     }
 
     public boolean isTaken() {

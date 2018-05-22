@@ -1,36 +1,33 @@
 package Pieces;
 
 import Main.Space;
+
 public class Piece {
     private Space space;
     private String side;
     private String name;
 
-    private int x;
-    private int y;
-
-    public Piece(Space space, String name){
-        this.space = space;
-        this.side = name.substring(0, 5);
+    public Piece(Space space, String name,  String side){
         this.name = name;
+        this.space = space;
+        this.side = side;
 
-        this.x = space.getX();
-        this.y = space.getY();
+        space.putPiece(this);
     }
 
     public void move(Space destination){
-        int desX = destination.getX();
-        int desY = destination.getY();
-        if(x == desX && y == desY){
-            return;
-        }
-        if(destination.isTaken()){
-            if(this.side.equals(destination.getPiece().side)){
-                return;
-            }
-            destination.removeImage();
-        }
-        destination.putPiece(name);
-        space.removeImage();
+
+    }
+
+    public Space getSpace() {
+        return space;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public String getSide(){
+        return side;
     }
 }

@@ -1,6 +1,6 @@
 package Main;
 
-import Pieces.Piece;
+import Pieces.*;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -29,30 +29,32 @@ public class Main extends Application {
     }
 
     void placePieces() {
-        spaces[0][0].putPiece("black_rook");
-        spaces[1][0].putPiece("black_knight");
-        spaces[2][0].putPiece("black_bishop");
-        spaces[3][0].putPiece("black_queen");
-        spaces[4][0].putPiece("black_king");
-        spaces[5][0].putPiece("black_bishop");
-        spaces[6][0].putPiece("black_knight");
-        spaces[7][0].putPiece("black_rook");
+        new Rook(spaces[0][0], "black");
+        new Knight(spaces[1][0], "black");
+        new Bishop(spaces[2][0], "black");
+        new Queen(spaces[3][0], "black");
+        new King(spaces[4][0], "black");
+        new Bishop(spaces[5][0], "black");
+        new Knight(spaces[6][0], "black");
+        new Rook(spaces[7][0], "black");
         for (int i = 0; i < 8; i++) {
-            spaces[i][1].putPiece("black_pawn");
+            new Pawn(spaces[i][1], "black");
         }
 
-        spaces[0][7].putPiece("white_rook");
-        spaces[1][7].putPiece("white_knight");
-        spaces[2][7].putPiece("white_bishop");
-        spaces[3][7].putPiece("white_queen");
-        spaces[4][7].putPiece("white_king");
-        spaces[5][7].putPiece("white_bishop");
-        spaces[6][7].putPiece("white_knight");
-        spaces[7][7].putPiece("white_rook");
+        new Rook(spaces[0][7], "white");
+        new Rook(spaces[1][7], "white");
+        new Knight(spaces[2][7], "white");
+        new Bishop(spaces[3][7], "white");
+        new Queen(spaces[4][7], "white");
+        new King(spaces[5][7], "white");
+        new Bishop(spaces[6][7], "white");
+        new Rook(spaces[7][7], "white");
         for (int i = 0; i < 8; i++) {
-            spaces[i][6].putPiece("white_pawn");
+            new Pawn(spaces[i][6], "white");
         }
     }
+
+
 
     private GridPane createGridPane() {
         gridPane = new GridPane();
