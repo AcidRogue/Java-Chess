@@ -1,5 +1,6 @@
 package Main;
 
+import Pieces.Piece;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -90,7 +91,7 @@ public class Main extends Application {
 
     private boolean pressed = false;
 
-    private Space toMove = null;
+    private Piece toMove = null;
 
     private void handleOnClick() {
         for (int i = 0; i < spaces.length; i++) {
@@ -98,15 +99,17 @@ public class Main extends Application {
                 Space s = spaces[i][j];
 
                 s.getHBox().setOnMousePressed(e -> {
+                    Piece p = s.getPiece();
+
                     if(pressed){
-                        toMove.move(s.getX(), s.getY());
+                        toMove.move(s);
                         toMove = null;
                         pressed = false;
                     }
                     else{
                         if (s.isTaken()) {
                             pressed = true;
-                            toMove = s;
+                            toMove = p;
                         }
                     }
                 });
