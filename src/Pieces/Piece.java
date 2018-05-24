@@ -20,7 +20,7 @@ public class Piece {
     }
 
     public boolean check(Space destination){
-        return !(this.space == destination);
+        return this.space != destination;
     }
 
     public Space getSpace() {

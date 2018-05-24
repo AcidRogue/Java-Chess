@@ -37,7 +37,7 @@ public class Pawn extends Piece{
         int desX = destination.getX();
         int desY = destination.getY();
 
-        if(!(x == desX)){
+        if(x != desX){
             return false;
         }
         if(this.getSide().equals("white")){

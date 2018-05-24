@@ -50,12 +50,12 @@ public class Main extends Application {
         }
 
         new Rook(spaces[0][7], "white");
-        new Rook(spaces[1][7], "white");
-        new Knight(spaces[2][7], "white");
-        new Bishop(spaces[3][7], "white");
-        new Queen(spaces[4][7], "white");
-        new King(spaces[5][7], "white");
-        new Bishop(spaces[6][7], "white");
+        new Knight(spaces[1][7], "white");
+        new Bishop(spaces[2][7], "white");
+        new Queen(spaces[3][7], "white");
+        new King(spaces[4][7], "white");
+        new Bishop(spaces[5][7], "white");
+        new Knight(spaces[6][7], "white");
         new Rook(spaces[7][7], "white");
         for (int i = 0; i < 8; i++) {
             new Pawn(spaces[i][6], "white");
@@ -118,15 +118,16 @@ public class Main extends Application {
 
                     if(pressed){
                         if(toMove.move(s)){
-                            toMove = null;
-                            pressed = false;
                             if(currentPlayer.equals(playerWhite)){
                                 currentPlayer = playerBlack;
                             }
                             else{
                                 currentPlayer = playerWhite;
                             }
+                            System.out.println("Move successful");
                         }
+                        toMove = null;
+                        pressed = false;
                     }
                     else{
                         if (s.isTaken()) {

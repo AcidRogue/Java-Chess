@@ -9,9 +9,7 @@ public class Queen extends Piece{
 
     @Override
     public boolean move(Space destination) {
-        int desX = destination.getX();
-        int desY = destination.getY();
-        if(this.getSpace().getX() == desX && this.getSpace().getY() == desY){
+        if(!check(destination)){
             return false;
         }
         if(destination.isTaken()){
@@ -23,5 +21,22 @@ public class Queen extends Piece{
         new Queen(destination, getSide());
         this.getSpace().removePiece();
         return true;
+    }
+
+    @Override
+    public boolean check(Space destination){
+        if(!super.check(destination)){
+            return false;
+        }
+
+        int x = this.getSpace().getX();
+        int y = this.getSpace().getY();
+        int desX = destination.getX();
+        int desY = destination.getY();
+
+        if(desX - x == desY - y)
+            return true;
+
+        return false;
     }
 }
