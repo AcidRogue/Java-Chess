@@ -15,8 +15,12 @@ public class Piece {
         space.putPiece(this);
     }
 
-    public void move(Space destination){
+    public boolean move(Space destination){
+        return false;
+    }
 
+    public boolean check(Space destination){
+        return !(this.space == destination);
     }
 
     public Space getSpace() {

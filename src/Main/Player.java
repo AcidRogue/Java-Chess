@@ -31,6 +31,10 @@ public class Player {
         }
     }
 
+    public List<Piece> getPieces() {
+        return pieces;
+    }
+
     public String getSide(){
         return side;
     }

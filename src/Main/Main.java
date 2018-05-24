@@ -16,8 +16,8 @@ public class Main extends Application {
 
     public static GridPane gridPane;
 
-    private Player playerWhite;
-    private Player playerBlack;
+    public static Player playerWhite;
+    public static Player playerBlack;
     private Player currentPlayer;
 
     @Override
@@ -37,28 +37,28 @@ public class Main extends Application {
     }
 
     void placePieces() {
-        playerBlack.addPiece(new Rook(spaces[0][0], "black"));
-        playerBlack.addPiece(new Knight(spaces[1][0], "black"));
-        playerBlack.addPiece(new Bishop(spaces[2][0], "black"));
-        playerBlack.addPiece(new Queen(spaces[3][0], "black"));
-        playerBlack.addPiece(new King(spaces[4][0], "black"));
-        playerBlack.addPiece(new Bishop(spaces[5][0], "black"));
-        playerBlack.addPiece(new Knight(spaces[6][0], "black"));
-        playerBlack.addPiece(new Rook(spaces[7][0], "black"));
+        new Rook(spaces[0][0], "black");
+        new Knight(spaces[1][0], "black");
+        new Bishop(spaces[2][0], "black");
+        new Queen(spaces[3][0], "black");
+        new King(spaces[4][0], "black");
+        new Bishop(spaces[5][0], "black");
+        new Knight(spaces[6][0], "black");
+        new Rook(spaces[7][0], "black");
         for (int i = 0; i < 8; i++) {
-            playerBlack.addPiece(new Pawn(spaces[i][1], "black"));
+            new Pawn(spaces[i][1], "black");
         }
 
-        playerWhite.addPiece(new Rook(spaces[0][7], "white"));
-        playerWhite.addPiece(new Rook(spaces[1][7], "white"));
-        playerWhite.addPiece(new Knight(spaces[2][7], "white"));
-        playerWhite.addPiece(new Bishop(spaces[3][7], "white"));
-        playerWhite.addPiece(new Queen(spaces[4][7], "white"));
-        playerWhite.addPiece(new King(spaces[5][7], "white"));
-        playerWhite.addPiece(new Bishop(spaces[6][7], "white"));
-        playerWhite.addPiece(new Rook(spaces[7][7], "white"));
+        new Rook(spaces[0][7], "white");
+        new Rook(spaces[1][7], "white");
+        new Knight(spaces[2][7], "white");
+        new Bishop(spaces[3][7], "white");
+        new Queen(spaces[4][7], "white");
+        new King(spaces[5][7], "white");
+        new Bishop(spaces[6][7], "white");
+        new Rook(spaces[7][7], "white");
         for (int i = 0; i < 8; i++) {
-            playerWhite.addPiece(new Pawn(spaces[i][6], "white"));
+            new Pawn(spaces[i][6], "white");
         }
     }
 
@@ -112,19 +112,20 @@ public class Main extends Application {
                         return;
                     }
 
-                    if(!p.getSide().equals(currentPlayer.getSide())){
+                    if(!pressed && !p.getSide().equals(currentPlayer.getSide())){
                         return;
                     }
 
                     if(pressed){
-                        toMove.move(s);
-                        toMove = null;
-                        pressed = false;
-                        if(currentPlayer.equals(playerWhite)){
-                            currentPlayer = playerBlack;
-                        }
-                        else{
-                            currentPlayer = playerWhite;
+                        if(toMove.move(s)){
+                            toMove = null;
+                            pressed = false;
+                            if(currentPlayer.equals(playerWhite)){
+                                currentPlayer = playerBlack;
+                            }
+                            else{
+                                currentPlayer = playerWhite;
+                            }
                         }
                     }
                     else{
@@ -133,6 +134,7 @@ public class Main extends Application {
                             toMove = p;
                         }
                     }
+
                 });
             }
         }

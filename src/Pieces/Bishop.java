@@ -8,20 +8,20 @@ public class Bishop extends Piece {
     }
 
     @Override
-    public void move(Space destination) {
+    public boolean move(Space destination) {
         int desX = destination.getX();
         int desY = destination.getY();
         if(this.getSpace().getX() == desX && this.getSpace().getY() == desY){
-            return;
+            return false;
         }
         if(destination.isTaken()){
             if(this.getSide().equals(destination.getPiece().getSide())){
-                return;
+                return false;
             }
             destination.removePiece();
         }
         new Bishop(destination, getSide());
         this.getSpace().removePiece();
+        return true;
     }
-
 }

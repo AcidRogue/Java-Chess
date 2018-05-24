@@ -27,10 +27,23 @@ public class Space {
         hBox.getChildren().add(iv);
 
         this.piece = p;
+
+        if(piece.getSide().equals("white")){
+            Main.playerWhite.addPiece(piece);
+        }
+        else{
+            Main.playerBlack.addPiece(piece);
+        }
     }
 
     public void removePiece() {
         hBox.getChildren().remove(0);
+        if(piece.getSide().equals("white")){
+            Main.playerWhite.removePiece(piece);
+        }
+        else{
+            Main.playerBlack.removePiece(piece);
+        }
         piece = null;
         taken = false;
     }
