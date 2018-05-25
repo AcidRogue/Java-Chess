@@ -34,8 +34,12 @@ public class Queen extends Piece{
         int desX = destination.getX();
         int desY = destination.getY();
 
-        if(desX - x == desY - y)
+        if(x == desX || y == desY){
             return true;
+        }
+        if(Math.abs(x - desX) == Math.abs(y - desY)){
+            return true;
+        }
 
         return false;
     }

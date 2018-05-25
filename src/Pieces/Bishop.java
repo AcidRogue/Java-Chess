@@ -34,7 +34,7 @@ public class Bishop extends Piece {
         int desX = destination.getX();
         int desY = destination.getY();
 
-        if(desX - x == desY - y){
+        if(Math.abs(x - desX) == Math.abs(y - desY)){
             return true;
         }
         return false;
