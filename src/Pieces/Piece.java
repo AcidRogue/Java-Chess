@@ -1,5 +1,6 @@
 package Pieces;
 
+import Main.Main;
 import Main.Space;
 
 import java.util.List;
@@ -9,36 +10,30 @@ public class Piece {
     private String side;
     private String name;
 
-    public Piece(Space space, String name,  String side){
+    public Piece(String name, String side){
         this.name = name;
-        this.space = space;
         this.side = side;
-
-        space.putPiece(this);
     }
 
-    public Piece(){
-
-    }
-
-    public boolean move(Space destination){
+    public boolean move(Space destination) {
         return false;
     }
 
     public boolean check(Space destination){
-        if(this.space == destination){
+        if (this.space == destination) {
             return false;
         }
 
         int x = this.getSpace().getX();
         int y = this.getSpace().getY();
 
+
         List<Space> result = getSpaces(x, y);
 
         for (int i = 0; i < result.size(); i++) {
-            if(destination == result.get(i)){
-                if(result.get(i).isTaken()){
-                    if(result.get(i).getPiece().getSide().equals(destination.getPiece().getSide())){
+            if (destination == result.get(i)) {
+                if (result.get(i).isTaken()) {
+                    if (result.get(i).getPiece().getSide().equals(destination.getPiece().getSide())) {
                         destination.removePiece();
                         return true;
                     }
@@ -47,12 +42,15 @@ public class Piece {
                 return true;
             }
         }
-
         return false;
     }
 
     public List<Space> getSpaces(int x, int y) {
         return null;
+    }
+
+    public void setSpace(Space space){
+        this.space = space;
     }
 
     public Space getSpace() {

@@ -7,23 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Knight extends Piece{
-    public Knight(Space space, String side) {
-        super(space, "knight", side);
+    public Knight(String side) {
+        super("knight", side);
     }
 
     @Override
     public boolean move(Space destination) {
-        if(!check(destination)){
+        if(!super.check(destination)){
             return false;
         }
-        if(destination.isTaken()){
-            if(this.getSide().equals(destination.getPiece().getSide())){
-                return false;
-            }
-            destination.removePiece();
-        }
-        new Knight(destination, getSide());
         this.getSpace().removePiece();
+        destination.putPiece(this);
+
         return true;
     }
 

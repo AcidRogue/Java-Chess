@@ -7,26 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bishop extends Piece {
-    public Bishop(Space space, String side) {
-        super(space, "bishop", side);
-    }
-    public Bishop(){
-        super();
+    public Bishop(String side) {
+        super("bishop", side);
     }
 
     @Override
     public boolean move(Space destination) {
-        if(!check(destination)){
+        if(!super.check(destination)){
             return false;
         }
-        if(destination.isTaken()){
-            if(this.getSide().equals(destination.getPiece().getSide())){
-                return false;
-            }
-            destination.removePiece();
-        }
-        new Bishop(destination, getSide());
         this.getSpace().removePiece();
+        destination.putPiece(this);
+
         return true;
     }
 

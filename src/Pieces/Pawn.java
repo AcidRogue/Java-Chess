@@ -7,20 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pawn extends Piece {
-    private boolean isFirst;
+    private boolean isFirst = true;
 
-    public Pawn(Space space, String side, boolean isFirst) {
-        super(space, "pawn", side);
-        this.isFirst = isFirst;
+    public Pawn(String side) {
+        super("pawn", side);
     }
 
     @Override
     public boolean move(Space destination) {
-        if (!check(destination)) {
+        if(!super.check(destination)){
             return false;
         }
-        new Pawn(destination, getSide(), false);
         this.getSpace().removePiece();
+        destination.putPiece(this);
+
+        isFirst = false;
         return true;
     }
 

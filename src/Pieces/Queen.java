@@ -6,23 +6,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Queen extends Piece {
-    public Queen(Space space, String side) {
-        super(space, "queen", side);
+    private Rook rook;
+    private Bishop bishop;
+
+    public Queen(String side) {
+        super("queen", side);
+        rook = new Rook(side);
+        bishop = new Bishop(side);
     }
 
     @Override
     public boolean move(Space destination) {
-        if (!check(destination)) {
+        if(!super.check(destination)){
             return false;
         }
-        if (destination.isTaken()) {
-            if (this.getSide().equals(destination.getPiece().getSide())) {
-                return false;
-            }
-            destination.removePiece();
-        }
-        new Queen(destination, getSide());
         this.getSpace().removePiece();
+        destination.putPiece(this);
+
         return true;
     }
 
@@ -30,8 +30,8 @@ public class Queen extends Piece {
     public List<Space> getSpaces(int x, int y) {
         List<Space> result = new ArrayList<>();
 
-        result.addAll(new Rook().getSpaces(x,y));
-        result.addAll(new Bishop().getSpaces(x, y));
+        result.addAll(rook.getSpaces(x,y));
+        result.addAll(bishop.getSpaces(x, y));
 
         return result;
     }

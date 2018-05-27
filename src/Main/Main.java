@@ -40,28 +40,28 @@ public class Main extends Application {
     }
 
     void placePieces() {
-        new Rook(spaces[0][0], "black");
-        new Knight(spaces[1][0], "black");
-        new Bishop(spaces[2][0], "black");
-        new Queen(spaces[3][0], "black");
-        new King(spaces[4][0], "black");
-        new Bishop(spaces[5][0], "black");
-        new Knight(spaces[6][0], "black");
-        new Rook(spaces[7][0], "black");
+        spaces[0][0].putPiece(new Rook("black"));
+        spaces[1][0].putPiece(new Knight("black"));
+        spaces[2][0].putPiece(new Bishop("black"));
+        spaces[3][0].putPiece(new Queen("black"));
+        spaces[4][0].putPiece(new King("black"));
+        spaces[5][0].putPiece(new Bishop("black"));
+        spaces[6][0].putPiece(new Knight("black"));
+        spaces[7][0].putPiece(new Rook("black"));
         for (int i = 0; i < 8; i++) {
-            new Pawn(spaces[i][1], "black", true);
+            spaces[i][1].putPiece(new Pawn("black"));
         }
 
-        new Rook(spaces[0][7], "white");
-        new Knight(spaces[1][7], "white");
-        new Bishop(spaces[2][7], "white");
-        new Queen(spaces[3][7], "white");
-        new King(spaces[4][7], "white");
-        new Bishop(spaces[5][7], "white");
-        new Knight(spaces[6][7], "white");
-        new Rook(spaces[7][7], "white");
+        spaces[0][7].putPiece(new Rook("white"));
+        spaces[1][7].putPiece(new Knight("white"));
+        spaces[2][7].putPiece(new Bishop("white"));
+        spaces[3][7].putPiece(new Queen("white"));
+        spaces[4][7].putPiece(new King("white"));
+        spaces[5][7].putPiece(new Bishop("white"));
+        spaces[6][7].putPiece(new Knight("white"));
+        spaces[7][7].putPiece(new Rook("white"));
         for (int i = 0; i < 8; i++) {
-            new Pawn(spaces[i][6], "white", true);
+            spaces[i][6].putPiece(new Pawn( "white"));
         }
     }
 

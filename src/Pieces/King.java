@@ -7,23 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class King extends Piece{
-    public King(Space space, String side) {
-        super(space, "king", side);
+    public King(String side) {
+        super("king", side);
     }
 
     @Override
     public boolean move(Space destination) {
-        if(!check(destination)){
+        if(!super.check(destination)){
             return false;
         }
-        if(destination.isTaken()){
-            if(this.getSide().equals(destination.getPiece().getSide())){
-                return false;
-            }
-            destination.removePiece();
-        }
-        new King(destination, getSide());
         this.getSpace().removePiece();
+        destination.putPiece(this);
+
         return true;
     }
 

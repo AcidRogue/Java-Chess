@@ -24,9 +24,11 @@ public class Space {
         ImageView iv = new ImageView("/Sprites/" + p.getSide() + "_" + p.getName() + ".png");
 
         taken = true;
-        hBox.getChildren().add(iv);
 
+        p.setSpace(this);
         this.piece = p;
+
+        hBox.getChildren().add(iv);
 
         if(piece.getSide().equals("white")){
             Main.playerWhite.addPiece(piece);

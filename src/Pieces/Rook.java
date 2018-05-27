@@ -7,26 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Rook extends Piece{
-    public Rook(Space space, String side) {
-        super(space, "rook", side);
-    }
-    public Rook(){
-        super();
+    public Rook(String side) {
+        super("rook", side);
     }
 
     @Override
     public boolean move(Space destination) {
-        if(!check(destination)){
-            return false;
-        }
-        if(destination.isTaken()){
-            if(this.getSide().equals(destination.getPiece().getSide())){
-                return false;
-            }
-            destination.removePiece();
-        }
-        new Rook(destination, getSide());
-        this.getSpace().removePiece();
+        super.move(destination);
         return true;
     }
 
