@@ -34,9 +34,9 @@ public class Knight extends Piece{
         int desX = destination.getX();
         int desY = destination.getY();
 
-        if(desX != x + 2 && desX != x - 2 && desY != y - 2 && desY != y + 2)
+        if(desX != x + 2 && desX != x - 2 && desY != y - 2 && desY != y + 2){
             return false;
-        
+        }
         return true;
     }
 }

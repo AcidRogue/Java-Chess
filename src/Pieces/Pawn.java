@@ -1,8 +1,12 @@
 package Pieces;
 
+import Main.Main;
 import Main.Space;
 
-public class Pawn extends Piece{
+import java.util.ArrayList;
+import java.util.List;
+
+public class Pawn extends Piece {
     private boolean isFirst = true;
 
     public Pawn(Space space, String side) {
@@ -11,14 +15,8 @@ public class Pawn extends Piece{
 
     @Override
     public boolean move(Space destination) {
-        if(!check(destination)){
+        if (!check(destination)) {
             return false;
-        }
-        if(destination.isTaken()){
-            if(this.getSide().equals(destination.getPiece().getSide())){
-                return false;
-            }
-            destination.removePiece();
         }
         new Pawn(destination, getSide());
         this.getSpace().removePiece();
@@ -27,8 +25,8 @@ public class Pawn extends Piece{
     }
 
     @Override
-    public boolean check(Space destination){
-        if(!super.check(destination)){
+    public boolean check(Space destination) {
+        if (!super.check(destination)) {
             return false;
         }
 
@@ -37,14 +35,48 @@ public class Pawn extends Piece{
         int desX = destination.getX();
         int desY = destination.getY();
 
-        if(x != desX){
-            return false;
+        List<Space> result = getSpaces(x, y);
+
+        for (int i = 0; i < result.size(); i++) {
+            if(destination == result.get(i)){
+                if(result.get(i).isTaken()){
+                    result.get(i).removePiece();
+                }
+                return true;
+            }
         }
-        if(this.getSide().equals("white")){
-            return (isFirst)? desY == y - 1 || desY == y - 2 : desY == y - 1;
+
+        return false;
+    }
+
+    @Override
+    public List<Space> getSpaces(int x, int y){
+        List<Space> result = new ArrayList<>();
+
+        if (this.getSide().equals("white")) {
+            if (Main.spaces[x - 1][y - 1].isTaken() && Main.spaces[x - 1][y - 1].getPiece().getSide().equals("black")) {
+                result.add(Main.spaces[x - 1][y - 1]);
+            }
+            if (Main.spaces[x + 1][y - 1].isTaken() && Main.spaces[x + 1][y - 1].getPiece().getSide().equals("black")) {
+                result.add(Main.spaces[x + 1][y - 1]);
+            }
+            if(isFirst){
+                result.add(Main.spaces[x][y - 1]);
+                result.add(Main.spaces[x][y - 2]);
+            }
+        } else {
+            if (Main.spaces[x - 1][y + 1].isTaken() && Main.spaces[x - 1][y + 1].getPiece().getSide().equals("white")) {
+                result.add(Main.spaces[x - 1][y + 1]);
+            }
+            if (Main.spaces[x + 1][y + 1].isTaken() && Main.spaces[x + 1][y + 1].getPiece().getSide().equals("white")) {
+                result.add(Main.spaces[x + 1][y + 1]);
+            }
+            if(isFirst){
+                result.add(Main.spaces[x][y + 1]);
+                result.add(Main.spaces[x][y + 2]);
+            }
         }
-        else{
-            return (isFirst)? desY == y + 1 || desY == y + 2 : desY == y + 1;
-        }
+
+        return result;
     }
 }

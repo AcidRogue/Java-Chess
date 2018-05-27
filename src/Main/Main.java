@@ -8,6 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main extends Application {
     private double canvasWidth = 600;
     private double canvasHeight = 600;
@@ -100,6 +103,9 @@ public class Main extends Application {
     private boolean pressed = false;
     private Piece toMove = null;
 
+    private List<String> styles = new ArrayList<>();
+    private List<Space> allowedSpaces = new ArrayList<>();
+
     private void handleOnClick() {
         for (int i = 0; i < spaces.length; i++) {
             for (int j = 0; j < spaces[i].length; j++) {
@@ -118,21 +124,35 @@ public class Main extends Application {
 
                     if(pressed){
                         if(toMove.move(s)){
+                            for (int k = 0; k < allowedSpaces.size(); k++) {
+                                allowedSpaces.get(k).getHBox().setStyle(styles.get(k));
+                            }
                             if(currentPlayer.equals(playerWhite)){
                                 currentPlayer = playerBlack;
                             }
                             else{
                                 currentPlayer = playerWhite;
                             }
-                            System.out.println("Move successful");
                         }
                         toMove = null;
                         pressed = false;
+                        allowedSpaces = new ArrayList<>();
+                        styles = new ArrayList<>();
                     }
                     else{
                         if (s.isTaken()) {
                             pressed = true;
                             toMove = p;
+                            allowedSpaces = toMove.getSpaces(toMove.getSpace().getX(), toMove.getSpace().getY());
+                            for (int k = 0; k < allowedSpaces.size(); k++) {
+                                styles.add(allowedSpaces.get(k).getHBox().getStyle());
+                                if(allowedSpaces.get(k).isTaken()){
+                                    allowedSpaces.get(k).getHBox().setStyle("-fx-background-color: #ff2020");
+                                }
+                                else{
+                                    allowedSpaces.get(k).getHBox().setStyle("-fx-background-color: #8bff56");
+                                }
+                            }
                         }
                     }
 
