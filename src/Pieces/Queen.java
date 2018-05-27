@@ -1,19 +1,23 @@
 package Pieces;
 
+import Main.Main;
 import Main.Space;
 
-public class Queen extends Piece{
+import java.util.ArrayList;
+import java.util.List;
+
+public class Queen extends Piece {
     public Queen(Space space, String side) {
         super(space, "queen", side);
     }
 
     @Override
     public boolean move(Space destination) {
-        if(!check(destination)){
+        if (!check(destination)) {
             return false;
         }
-        if(destination.isTaken()){
-            if(this.getSide().equals(destination.getPiece().getSide())){
+        if (destination.isTaken()) {
+            if (this.getSide().equals(destination.getPiece().getSide())) {
                 return false;
             }
             destination.removePiece();
@@ -24,23 +28,69 @@ public class Queen extends Piece{
     }
 
     @Override
-    public boolean check(Space destination){
-        if(!super.check(destination)){
-            return false;
+    public boolean check(Space destination) {
+        return super.check(destination);
+    }
+
+    @Override
+    public List<Space> getSpaces(int x, int y) {
+        List<Space> result = new ArrayList<>();
+
+        //Horizontal spaces
+        for (int i = x - 1; i >= 0; i--) {
+            result.add(Main.spaces[i][y]);
+            if (Main.spaces[i][y].isTaken()) {
+                break;
+            }
+        }
+        for (int i = x + 1; i < 8; i++) {
+            result.add(Main.spaces[i][y]);
+            if (Main.spaces[i][y].isTaken()) {
+                break;
+            }
         }
 
-        int x = this.getSpace().getX();
-        int y = this.getSpace().getY();
-        int desX = destination.getX();
-        int desY = destination.getY();
-
-        if(x == desX || y == desY){
-            return true;
+        //Vertical spaces
+        for (int i = y - 1; i >= 0; i--) {
+            result.add(Main.spaces[x][i]);
+            if (Main.spaces[x][i].isTaken()) {
+                break;
+            }
         }
-        if(Math.abs(x - desX) == Math.abs(y - desY)){
-            return true;
+        for (int i = y + 1; i < 8; i++) {
+            result.add(Main.spaces[x][i]);
+            if (Main.spaces[x][i].isTaken()) {
+                break;
+            }
         }
 
-        return false;
+        //Diagonal spaces
+        for (int i = x - 1, j = y - 1; i >= 0 && j >= 0; i--, j--) {
+            result.add(Main.spaces[i][j]);
+            if (Main.spaces[i][j].isTaken()) {
+                break;
+            }
+        }
+        for (int i = x + 1, j = y + 1; i < 8 && j < 8; i++, j++) {
+            result.add(Main.spaces[i][j]);
+            if (Main.spaces[i][j].isTaken()) {
+                break;
+            }
+        }
+
+        for (int i = x - 1, j = y + 1; i >= 0 && j < 8; i--, j++) {
+            result.add(Main.spaces[i][j]);
+            if (Main.spaces[i][j].isTaken()) {
+                break;
+            }
+        }
+        for (int i = x + 1, j = y - 1; i < 8 && j >= 0; i++, j--) {
+            result.add(Main.spaces[i][j]);
+            if (Main.spaces[i][j].isTaken()) {
+                break;
+            }
+        }
+
+        return result;
     }
 }

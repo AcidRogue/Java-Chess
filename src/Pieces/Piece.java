@@ -22,7 +22,29 @@ public class Piece {
     }
 
     public boolean check(Space destination){
-        return this.space != destination;
+        if(this.space == destination){
+            return false;
+        }
+
+        int x = this.getSpace().getX();
+        int y = this.getSpace().getY();
+
+        List<Space> result = getSpaces(x, y);
+
+        for (int i = 0; i < result.size(); i++) {
+            if(destination == result.get(i)){
+                if(result.get(i).isTaken()){
+                    if(result.get(i).getPiece().getSide().equals(destination.getPiece().getSide())){
+                        destination.removePiece();
+                        return true;
+                    }
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public List<Space> getSpaces(int x, int y) {

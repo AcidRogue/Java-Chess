@@ -49,7 +49,7 @@ public class Main extends Application {
         new Knight(spaces[6][0], "black");
         new Rook(spaces[7][0], "black");
         for (int i = 0; i < 8; i++) {
-            new Pawn(spaces[i][1], "black");
+            new Pawn(spaces[i][1], "black", true);
         }
 
         new Rook(spaces[0][7], "white");
@@ -61,7 +61,7 @@ public class Main extends Application {
         new Knight(spaces[6][7], "white");
         new Rook(spaces[7][7], "white");
         for (int i = 0; i < 8; i++) {
-            new Pawn(spaces[i][6], "white");
+            new Pawn(spaces[i][6], "white", true);
         }
     }
 
@@ -124,15 +124,16 @@ public class Main extends Application {
 
                     if(pressed){
                         if(toMove.move(s)){
-                            for (int k = 0; k < allowedSpaces.size(); k++) {
-                                allowedSpaces.get(k).getHBox().setStyle(styles.get(k));
-                            }
+
                             if(currentPlayer.equals(playerWhite)){
                                 currentPlayer = playerBlack;
                             }
                             else{
                                 currentPlayer = playerWhite;
                             }
+                        }
+                        for (int k = 0; k < allowedSpaces.size(); k++) {
+                            allowedSpaces.get(k).getHBox().setStyle(styles.get(k));
                         }
                         toMove = null;
                         pressed = false;
@@ -147,7 +148,9 @@ public class Main extends Application {
                             for (int k = 0; k < allowedSpaces.size(); k++) {
                                 styles.add(allowedSpaces.get(k).getHBox().getStyle());
                                 if(allowedSpaces.get(k).isTaken()){
-                                    allowedSpaces.get(k).getHBox().setStyle("-fx-background-color: #ff2020");
+                                    if(!allowedSpaces.get(k).getPiece().getSide().equals(toMove.getSide())){
+                                        allowedSpaces.get(k).getHBox().setStyle("-fx-background-color: #ff2020");
+                                    }
                                 }
                                 else{
                                     allowedSpaces.get(k).getHBox().setStyle("-fx-background-color: #8bff56");

@@ -2,6 +2,9 @@ package Pieces;
 
 import Main.Space;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Rook extends Piece{
     public Rook(Space space, String side) {
         super(space, "rook", side);
@@ -38,5 +41,12 @@ public class Rook extends Piece{
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<Space> getSpaces(int x, int y){
+        List<Space> result = new ArrayList<>();
+
+        return result;
     }
 }

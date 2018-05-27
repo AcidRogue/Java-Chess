@@ -2,6 +2,9 @@ package Pieces;
 
 import Main.Space;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class King extends Piece{
     public King(Space space, String side) {
         super(space, "king", side);
@@ -39,4 +42,12 @@ public class King extends Piece{
         }
         return true;
     }
+
+    @Override
+    public List<Space> getSpaces(int x, int y){
+        List<Space> result = new ArrayList<>();
+
+        return result;
+    }
+
 }
