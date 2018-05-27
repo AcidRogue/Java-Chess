@@ -67,5 +67,4 @@ public class Space {
     public int getY() {
         return y;
     }
-
 }

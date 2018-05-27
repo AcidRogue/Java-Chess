@@ -124,7 +124,6 @@ public class Main extends Application {
 
                     if(pressed){
                         if(toMove.move(s)){
-
                             if(currentPlayer.equals(playerWhite)){
                                 currentPlayer = playerBlack;
                             }

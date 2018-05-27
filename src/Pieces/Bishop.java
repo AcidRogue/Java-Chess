@@ -1,5 +1,6 @@
 package Pieces;
 
+import Main.Main;
 import Main.Space;
 
 import java.util.ArrayList;
@@ -8,6 +9,9 @@ import java.util.List;
 public class Bishop extends Piece {
     public Bishop(Space space, String side) {
         super(space, "bishop", side);
+    }
+    public Bishop(){
+        super();
     }
 
     @Override
@@ -27,25 +31,34 @@ public class Bishop extends Piece {
     }
 
     @Override
-    public boolean check(Space destination){
-        if(!super.check(destination)){
-            return false;
-        }
-
-        int x = this.getSpace().getX();
-        int y = this.getSpace().getY();
-        int desX = destination.getX();
-        int desY = destination.getY();
-
-        if(Math.abs(x - desX) == Math.abs(y - desY)){
-            return true;
-        }
-        return false;
-    }
-
-    @Override
     public List<Space> getSpaces(int x, int y){
         List<Space> result = new ArrayList<>();
+
+        for (int i = x - 1, j = y - 1; i >= 0 && j >= 0; i--, j--) {
+            result.add(Main.spaces[i][j]);
+            if (Main.spaces[i][j].isTaken()) {
+                break;
+            }
+        }
+        for (int i = x + 1, j = y + 1; i < 8 && j < 8; i++, j++) {
+            result.add(Main.spaces[i][j]);
+            if (Main.spaces[i][j].isTaken()) {
+                break;
+            }
+        }
+
+        for (int i = x - 1, j = y + 1; i >= 0 && j < 8; i--, j++) {
+            result.add(Main.spaces[i][j]);
+            if (Main.spaces[i][j].isTaken()) {
+                break;
+            }
+        }
+        for (int i = x + 1, j = y - 1; i < 8 && j >= 0; i++, j--) {
+            result.add(Main.spaces[i][j]);
+            if (Main.spaces[i][j].isTaken()) {
+                break;
+            }
+        }
 
         return result;
     }

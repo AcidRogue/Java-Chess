@@ -17,6 +17,10 @@ public class Piece {
         space.putPiece(this);
     }
 
+    public Piece(){
+
+    }
+
     public boolean move(Space destination){
         return false;
     }

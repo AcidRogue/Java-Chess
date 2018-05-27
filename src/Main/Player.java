@@ -38,6 +38,4 @@ public class Player {
     public String getSide(){
         return side;
     }
-
-
 }

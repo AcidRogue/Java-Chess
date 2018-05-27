@@ -25,11 +25,6 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public boolean check(Space destination) {
-        return super.check(destination);
-    }
-
-    @Override
     public List<Space> getSpaces(int x, int y){
         List<Space> result = new ArrayList<>();
 

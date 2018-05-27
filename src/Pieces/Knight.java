@@ -1,5 +1,6 @@
 package Pieces;
 
+import Main.Main;
 import Main.Space;
 
 import java.util.ArrayList;
@@ -27,25 +28,16 @@ public class Knight extends Piece{
     }
 
     @Override
-    public boolean check(Space destination){
-        if(!super.check(destination)){
-            return false;
-        }
-
-        int x = this.getSpace().getX();
-        int y = this.getSpace().getY();
-        int desX = destination.getX();
-        int desY = destination.getY();
-
-        if(desX != x + 2 && desX != x - 2 && desY != y - 2 && desY != y + 2){
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public List<Space> getSpaces(int x, int y){
         List<Space> result = new ArrayList<>();
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (Math.abs(i - x) == 2 && Math.abs(j -y) == 1 || Math.abs(i - x) == 1 && Math.abs(j - y) == 2) {
+                    result.add(Main.spaces[i][j]);
+                }
+            }
+        }
 
         return result;
     }
