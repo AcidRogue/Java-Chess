@@ -12,12 +12,6 @@ public class Rook extends Piece{
     }
 
     @Override
-    public boolean move(Space destination) {
-        super.move(destination);
-        return true;
-    }
-
-    @Override
     public List<Space> getSpaces(int x, int y){
         List<Space> result = new ArrayList<>();
 

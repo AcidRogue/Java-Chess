@@ -15,40 +15,37 @@ public class Pawn extends Piece {
 
     @Override
     public boolean move(Space destination) {
-        if(!super.check(destination)){
-            return false;
+        if(super.move(destination)){
+            isFirst = false;
+            return true;
         }
-        this.getSpace().removePiece();
-        destination.putPiece(this);
-
-        isFirst = false;
-        return true;
+        return false;
     }
 
     @Override
-    public List<Space> getSpaces(int x, int y){
+    public List<Space> getSpaces(int x, int y) {
         List<Space> result = new ArrayList<>();
 
         if (this.getSide().equals("white")) {
             result.add(Main.spaces[x][y - 1]);
-            if (Main.spaces[x - 1][y - 1].isTaken() && Main.spaces[x - 1][y - 1].getPiece().getSide().equals("black")) {
+            if (x - 1 >= 0 && y - 1 >= 0 && Main.spaces[x - 1][y - 1].isTaken() && Main.spaces[x - 1][y - 1].getPiece().getSide().equals("black")) {
                 result.add(Main.spaces[x - 1][y - 1]);
             }
-            if (Main.spaces[x + 1][y - 1].isTaken() && Main.spaces[x + 1][y - 1].getPiece().getSide().equals("black")) {
+            if (x + 1 < 8 && y - 1 >= 0 && Main.spaces[x + 1][y - 1].isTaken() && Main.spaces[x + 1][y - 1].getPiece().getSide().equals("black")) {
                 result.add(Main.spaces[x + 1][y - 1]);
             }
-            if(isFirst){
+            if (isFirst) {
                 result.add(Main.spaces[x][y - 2]);
             }
         } else {
             result.add(Main.spaces[x][y + 1]);
-            if (Main.spaces[x - 1][y + 1].isTaken() && Main.spaces[x - 1][y + 1].getPiece().getSide().equals("white")) {
+            if (x - 1 >= 0 && y + 1 < 8 && Main.spaces[x - 1][y + 1].isTaken() && Main.spaces[x - 1][y + 1].getPiece().getSide().equals("white")) {
                 result.add(Main.spaces[x - 1][y + 1]);
             }
-            if (Main.spaces[x + 1][y + 1].isTaken() && Main.spaces[x + 1][y + 1].getPiece().getSide().equals("white")) {
+            if (x + 1 < 8 && y + 1 < 8 && Main.spaces[x + 1][y + 1].isTaken() && Main.spaces[x + 1][y + 1].getPiece().getSide().equals("white")) {
                 result.add(Main.spaces[x + 1][y + 1]);
             }
-            if(isFirst){
+            if (isFirst) {
                 result.add(Main.spaces[x][y + 2]);
             }
         }

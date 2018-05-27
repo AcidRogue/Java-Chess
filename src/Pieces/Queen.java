@@ -16,17 +16,6 @@ public class Queen extends Piece {
     }
 
     @Override
-    public boolean move(Space destination) {
-        if(!super.check(destination)){
-            return false;
-        }
-        this.getSpace().removePiece();
-        destination.putPiece(this);
-
-        return true;
-    }
-
-    @Override
     public List<Space> getSpaces(int x, int y) {
         List<Space> result = new ArrayList<>();
 

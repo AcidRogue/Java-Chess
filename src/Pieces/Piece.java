@@ -16,29 +16,37 @@ public class Piece {
     }
 
     public boolean move(Space destination) {
-        return false;
+        if(!check(destination)){
+            return false;
+        }
+        if(destination.isTaken()){
+            if(this.getSide().equals(destination.getPiece().getSide())){
+                return false;
+            }
+            else{
+                destination.removePiece();
+            }
+        }
+
+        this.getSpace().removePiece();
+        destination.putPiece(this);
+
+        return true;
     }
 
     public boolean check(Space destination){
         if (this.space == destination) {
+            System.out.println("same");
             return false;
         }
 
         int x = this.getSpace().getX();
         int y = this.getSpace().getY();
 
-
         List<Space> result = getSpaces(x, y);
 
         for (int i = 0; i < result.size(); i++) {
             if (destination == result.get(i)) {
-                if (result.get(i).isTaken()) {
-                    if (result.get(i).getPiece().getSide().equals(destination.getPiece().getSide())) {
-                        destination.removePiece();
-                        return true;
-                    }
-                    return false;
-                }
                 return true;
             }
         }
