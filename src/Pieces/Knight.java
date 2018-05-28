@@ -23,6 +23,8 @@ public class Knight extends Piece{
             }
         }
 
+        super.check(result);
+
         return result;
     }
 }

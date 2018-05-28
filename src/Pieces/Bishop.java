@@ -41,6 +41,8 @@ public class Bishop extends Piece {
             }
         }
 
+        super.check(result);
+
         return result;
     }
 }

@@ -12,6 +12,15 @@ public class Rook extends Piece{
     }
 
     @Override
+    public boolean move(Space destination) {
+        if(super.move(destination)){
+            return true;
+        }
+        return false;
+    }
+
+
+    @Override
     public List<Space> getSpaces(int x, int y){
         List<Space> result = new ArrayList<>();
 
@@ -42,6 +51,8 @@ public class Rook extends Piece{
                 break;
             }
         }
+
+        super.check(result);
 
         return result;
     }
