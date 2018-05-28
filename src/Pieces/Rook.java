@@ -19,6 +19,11 @@ public class Rook extends Piece{
         return false;
     }
 
+    //Single time use method for castling.
+    public void moveTo(Space destination){
+        this.getSpace().removePiece();
+        destination.putPiece(this);
+    }
 
     @Override
     public List<Space> getSpaces(int x, int y){

@@ -1,6 +1,5 @@
 package Pieces;
 
-import Main.Main;
 import Main.Space;
 
 import java.util.List;

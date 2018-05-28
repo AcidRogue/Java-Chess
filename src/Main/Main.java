@@ -40,29 +40,29 @@ public class Main extends Application {
     }
 
     void placePieces() {
-        spaces[0][0].putPiece(new Rook("black"));
-        spaces[1][0].putPiece(new Knight("black"));
-        spaces[2][0].putPiece(new Bishop("black"));
-        spaces[3][0].putPiece(new Queen("black"));
-        spaces[5][0].putPiece(new Bishop("black"));
-        spaces[6][0].putPiece(new Knight("black"));
+        //spaces[0][0].putPiece(new Rook("black"));
+        //spaces[1][0].putPiece(new Knight("black"));
+        //spaces[2][0].putPiece(new Bishop("black"));
+        //spaces[3][0].putPiece(new Queen("black"));
+        //spaces[5][0].putPiece(new Bishop("black"));
+        //spaces[6][0].putPiece(new Knight("black"));
         spaces[7][0].putPiece(new Rook("black"));
         spaces[4][0].putPiece(new King("black"));
-        for (int i = 0; i < 8; i++) {
-            spaces[i][1].putPiece(new Pawn("black"));
-        }
+        //for (int i = 0; i < 8; i++) {
+        //    spaces[i][1].putPiece(new Pawn("black"));
+        //}
 
-        spaces[0][7].putPiece(new Rook("white"));
-        spaces[1][7].putPiece(new Knight("white"));
-        spaces[2][7].putPiece(new Bishop("white"));
-        spaces[3][7].putPiece(new Queen("white"));
-        spaces[5][7].putPiece(new Bishop("white"));
-        spaces[6][7].putPiece(new Knight("white"));
+        //spaces[0][7].putPiece(new Rook("white"));
+        //spaces[1][7].putPiece(new Knight("white"));
+        //spaces[2][7].putPiece(new Bishop("white"));
+        //spaces[3][7].putPiece(new Queen("white"));
+        //spaces[5][7].putPiece(new Bishop("white"));
+        //spaces[6][7].putPiece(new Knight("white"));
         spaces[7][7].putPiece(new Rook("white"));
         spaces[4][7].putPiece(new King("white"));
-        for (int i = 0; i < 8; i++) {
-            spaces[i][6].putPiece(new Pawn( "white"));
-        }
+        //for (int i = 0; i < 8; i++) {
+        //    spaces[i][6].putPiece(new Pawn( "white"));
+        //}
     }
 
     private GridPane createGridPane() {
