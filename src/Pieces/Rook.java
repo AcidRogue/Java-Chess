@@ -11,14 +11,6 @@ public class Rook extends Piece{
         super("rook", side);
     }
 
-    @Override
-    public boolean move(Space destination) {
-        if(super.move(destination)){
-            return true;
-        }
-        return false;
-    }
-
     //Single time use method for castling.
     public void moveTo(Space destination){
         this.getSpace().removePiece();
